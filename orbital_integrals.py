@@ -60,8 +60,6 @@ for q_index in q_points_indices:
     orb_integral_array[q_index] = [int_1s1s_onsite, int_1s1s_nn, int_1s1s_nn2]
     print(q_index, int_1s1s_onsite, int_1s1s_nn, int_1s1s_nn2)
 
-    
-    
 
 ###Saving the integral results
 with open("chain//chain_integrals_k_%d.pkl" % k_density, 'wb') as f:
