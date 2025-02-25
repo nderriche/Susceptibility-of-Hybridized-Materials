@@ -9,7 +9,7 @@ lib = ctypes.CDLL(os.path.abspath('integrals.so'))
 start_time = time.time()
 
 #Initial Parameters
-k_density = int(sys.argv[1])
+k_density = 300
 ao_ang = 0.529
 lat_const = 1.0
 
@@ -36,12 +36,10 @@ for q_index in q_points_indices:
     integrand_onsite_data_to_pass = ctypes.cast( (ctypes.c_double*7)(qx_value,qy_value,qz_value,ao_ang, 0,0,0) , ctypes.c_void_p)
     integrand_nn_data_to_pass = ctypes.cast( (ctypes.c_double*7)(qx_value,qy_value,qz_value,ao_ang, 0, 0, 1*lat_const) , ctypes.c_void_p)
     integrand_nn2_data_to_pass = ctypes.cast( (ctypes.c_double*7)(qx_value,qy_value,qz_value,ao_ang, 0, 0, 2*lat_const) , ctypes.c_void_p)
-
 	
     #onsite integral functions
     onsite_1s1s_real = LowLevelCallable(lib.real_1s1s, integrand_onsite_data_to_pass)
     onsite_1s1s_imag = LowLevelCallable(lib.imag_1s1s, integrand_onsite_data_to_pass)
-
 
     #nn integral functions
     nn_1s1s_real = LowLevelCallable(lib.real_1s1s, integrand_nn_data_to_pass)
@@ -51,9 +49,6 @@ for q_index in q_points_indices:
     nn2_1s1s_real = LowLevelCallable(lib.real_1s1s, integrand_nn2_data_to_pass)
     nn2_1s1s_imag = LowLevelCallable(lib.imag_1s1s, integrand_nn2_data_to_pass)
 
-
-
-    
     #Computing all of the integrals, and populating the integral array
     int_1s1s_onsite = complex(integrate.nquad(onsite_1s1s_real, [[-n.inf,n.inf],[-n.inf,n.inf],[-n.inf,n.inf]])[0],  integrate.nquad(onsite_1s1s_imag, [[-n.inf,n.inf],[-n.inf,n.inf],[-n.inf,n.inf]])[0])
  
@@ -65,8 +60,6 @@ for q_index in q_points_indices:
     orb_integral_array[q_index] = [int_1s1s_onsite, int_1s1s_nn, int_1s1s_nn2]
     print(q_index, int_1s1s_onsite, int_1s1s_nn, int_1s1s_nn2)
 
-    
-    
 
 ###Saving the integral results
 with open("chain//chain_integrals_k_%d.pkl" % k_density, 'wb') as f:
