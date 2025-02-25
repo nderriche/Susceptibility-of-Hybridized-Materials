@@ -140,7 +140,6 @@ double imag_2p2s(int n, double *x, void *imported_data){
 
 
 
-/*
 // 2p-2p (Orthogonal) Onsite
 double onsite_2p2p_orthogonal_real(int n, double *x, void *imported_data){
 	double qx =  *(double *)imported_data, qy = *((double *)(imported_data)+1), qz = *((double *)(imported_data)+2), a_0 = *((double *)(imported_data)+3);
@@ -155,7 +154,7 @@ double onsite_2p2p_orthogonal_imag(int n, double *x, void *imported_data){
 	double r = sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
 	return pow((x[2]/a_0)/(4.0*sqrt(2*M_PI)*pow(a_0,1.5)),2) * exp(-r/a_0) * sin(qx*x[0] + qy*x[1] + qz*x[2]);
 }
-*/
+
 
 
 
