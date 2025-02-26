@@ -17,40 +17,30 @@ boltz = 8.617333262145e-5
 
 fermi_band_number = 1
 nb_bands = 14
-#nb_bands = 28
 nb_orbs = 14
 orbs_array = [r"$1s$", r"$2s$", r"$3s$", r"$2p_y$", r"$2p_z$", r"$2p_x$", r"$3p_y$", r"$3p_z$", r"$3p_x$", r"$3d_{-2}$",r"$3d_{-1}$",r"$3d_{0}$",r"$3d_{1}$",r"$3d_{2}$",]
 
 bandsw = n.loadtxt("fplo//band//eq_lat_var_x//data_files//3.00//+bweights_200", unpack=True)
-#bandsw = s.data.load("D://Nassim//Documents//master//H//fplo//band//eq//+bweights_Li")
 weights = [[[]]]
 temp_array = []
 t_array=[]
 
 
 # Parsing band weights output file to extract weights in arrays
-
-#Looping over bands
 for i in range(nb_bands):
-    
     if i>0:
         weights += [[]]
-    
     #Looping over kpoints + orbitals
     for j in range(nb_orbs + 2):
-        
             k = 0
             #Looping over to separate the bands
             while (nb_bands*k + i)<len(bandsw[j]):
                 temp_array += [bandsw[j][nb_bands*k + i]]
                 k += 1
-                
             weights[i] += [temp_array]
             temp_array=[]
-
 #Removing first empty array in the first band array (not sure why it exists only there)
 weights[0].pop(0)
-
 
 #Setting up the color arrays with weight-dependent alpha transparency
 weight_colors = np.zeros((len(weights[0][0]),4))
@@ -103,7 +93,7 @@ plt.grid(True)
 figure = plt.gcf()
 figure.set_size_inches(21,11.8)
 plt.show()
-#plt.savefig("..//H//fplo//band//Li_eq_band_scale.png", bbox_inches='tight')
+plt.savefig("..//H//fplo//band//Li_eq_band_scale.png", bbox_inches='tight')
 plt.close()
 
 
@@ -120,13 +110,10 @@ temp_array = []
 
 #Parsing band weights output file to extract weights in arrays
 for i in range(nb_bands):
-    
     if i>0:
         weights += [[]]
-    
     #Looping over kpoints + orbitals
     for j in range(nb_orbs + 2):
-        
             k = 0
             #Looping over to separate the bands
             if j == 1:
@@ -136,11 +123,9 @@ for i in range(nb_bands):
             else:
                 while (nb_bands*k + i)<len(bandsw[j]):
                     temp_array += [bandsw[j][nb_bands*k + i]]
-                    k += 1
-                
+                    k += 1   
             weights[i] += [temp_array]
             temp_array=[]
-
 #Removing first empty array in the first band array (not sure why it exists only there)
 weights[0].pop(0)
 
