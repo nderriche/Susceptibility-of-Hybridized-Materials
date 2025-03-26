@@ -3,6 +3,9 @@
 Contains the Python and C scripts used to calculate the wavefunction-dependent charge susceptibility (Lindhard function) of materials. The values associated with parameters and functions in these scripts are tailored for calculations associated with hydrogen and lithium chains, which led to the publication of the following paper showing the suppression of expected Peierls instabilities in highly hybridized materials.  
 **[Link to paper](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.106.064102)**
 
+If you use or are inspired by the contents of this repository, please cite the associated paper like so:\
+**Nassim Derriche, Ilya Elfimov, and George Sawatzky. Suppression of Peierls-like nesting-based instabilities in solids. Physical Review B, 106(6):064102, August 2022**
+
 However, these scripts can be easily adapted to perform similar calculations for different materials; one must simply follow the following series of steps while making sure to modify parameter values (such as imported DFT data file locations) appropriately.
 
 # Steps for a Complete Calculation
